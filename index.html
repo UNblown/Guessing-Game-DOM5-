@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM5</title>
+</head>
+
+<style>
+    * {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.reset {
+    display: flex;
+    justify-content: center;
+    border: 2px;
+    border-radius: 8px;
+    padding: 1.5% 6% 1.5% 6%;
+    background-color: red;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 5px 8px rgba(0, 0, 0, 0.50);
+}
+
+.reset:hover {
+    cursor: pointer;
+    background-color: rgb(165, 38, 38);
+}
+
+
+.text {
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 87, 138);
+    text-shadow: rgba(0, 0, 0, 0.60);
+}
+
+#text {
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 146, 231);
+    text-shadow: rgba(0, 0, 0, 0.60);
+    font-size: 25px;
+}
+
+.container {
+    display: flex;
+    margin-top: 3%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main_box {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin: 5px 5px 5px 5px;
+}
+
+.box {
+    border: 0px solid black;
+    background-color: rgb(159, 220, 255);
+    border-radius: 8px;
+    margin: 2px 2px 2px 4px;
+    padding: 5%;
+    box-shadow: 5px 8px rgba(0, 0, 0, 0.50);
+}
+
+.box:hover {
+    cursor: pointer;
+    background-color: rgb(86, 193, 255);
+    box-shadow: 5px 10px rgba(0, 0, 0, 0.60);
+}
+</style>
+
+<body>
+    <h1 class="text">Try to find the Gold:</h1>
+    <h3 id="text">Start Guessing</h3>
+    <div class="container">
+        <div class="main_box">
+            <button class="box box_1" id="box1" onclick="revel('box1')">&nbsp</button>
+            <button class="box box_2" id="box2" onclick="revel('box2')">&nbsp</button>
+            <button class="box box_3" id="box3" onclick="revel('box3')">&nbsp</button>
+        </div>
+        <div class="main_box">            
+            <button class="box" id="box4" onclick="revel('box4')">&nbsp</button>
+            <button class="box" id="box5" onclick="revel('box5')">&nbsp</button>
+            <button class="box" id="box6" onclick="revel('box6')">&nbsp</button>
+        </div>
+        <div class="main_box">
+            <button class="box" id="box7" onclick="revel('box7')">&nbsp</button>
+            <button class="box" id="box8" onclick="revel('box8')">&nbsp</button>
+            <button class="box" id="box9" onclick="revel('box9')">&nbsp</button>
+        </div>
+    </div>
+    <div class="btn">
+        <button class="reset" onclick="reset()">Reset</button>
+    </div>
+</body>
+<script>
+    var rand = Math.ceil(Math.random()*9);
+console.log(rand)
+
+var gulFarge = "box_" + rand;
+console.log(gulFarge);
+
+var box = ['box1', 'box2', 'box3', 'box4', 'box5', 'box6', 'box7', 'box8', 'box9'];
+var boxLenght = box.length;
+
+
+var win =""
+var lose = ""
+var counter = 0;
+
+var random = document.getElementById("box" + rand);
+console.log(random.id);
+
+function revel(verdi) {
+    if (counter == 3) {
+        document.getElementById("text").innerHTML = "You've reached the guessing cap, please click Reset below!";
+        return false;
+    }
+    else {
+        console.log(counter);
+        counter++;
+    }
+
+    for (var i = 0; i <= boxLenght; i++) {
+        if (verdi == box[i]) {
+            tempBox = "#"+box[i]
+            var temp = document.querySelector(tempBox);
+            temp.style.backgroundColor = "red";
+            document.getElementById("text").innerHTML = "Nope, Try again!";
+
+        if (verdi == random.id) {
+            var gul = document.getElementById("box" + rand).style.backgroundColor = "#FFDF00";
+            document.getElementById("text").innerHTML = "Nice, You found the gold!";
+        }
+    }
+
+}
+
+}
+
+function reset() {
+    document.location.reload(true);
+}
+
+</script>
+</html>
